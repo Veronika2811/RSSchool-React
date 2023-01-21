@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/RSSchool-React/static/css/main.d177625c.css",
-    "main.js": "/RSSchool-React/static/js/main.35b9dd3c.js",
+    "main.js": "/RSSchool-React/static/js/main.f8e31572.js",
     "index.html": "/RSSchool-React/index.html",
     "main.d177625c.css.map": "/RSSchool-React/static/css/main.d177625c.css.map",
-    "main.35b9dd3c.js.map": "/RSSchool-React/static/js/main.35b9dd3c.js.map"
+    "main.f8e31572.js.map": "/RSSchool-React/static/js/main.f8e31572.js.map"
   },
   "entrypoints": [
     "static/css/main.d177625c.css",
-    "static/js/main.35b9dd3c.js"
+    "static/js/main.f8e31572.js"
   ]
 }
