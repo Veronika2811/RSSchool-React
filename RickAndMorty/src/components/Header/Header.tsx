@@ -8,7 +8,7 @@ import classes from './Header.module.scss';
 const Header = () => {
   return (
     <header className={classes.header}>
-      <Logo src="/assets/rick-and-morty.png" alt="Rick and Morty" />
+      <Logo src="./assets/rick-and-morty.png" alt="Rick and Morty" />
       <Navigate />
     </header>
   );

@@ -2,6 +2,7 @@
   "name": "react-components",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://veronika2811.github.io/RSSchool-React/",
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.1",
     "@types/node": "^16.11.63",
