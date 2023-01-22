@@ -1,16 +1,20 @@
-import React, { useContext, ChangeEvent } from 'react';
+import React, { ChangeEvent } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 
-import { ContextApp } from 'reducers/reducers';
+import { saveSortingRule } from 'store/appManagementSlice';
+
+import { RootState } from 'store/store';
 
 const SelectSorting = () => {
-  const { state, dispatch } = useContext(ContextApp);
+  const sortRule = useSelector((state: RootState) => state.APP_MANAGEMENT_SLICE.sortRule);
+  const dispatch = useDispatch();
 
   const handleOnClickSorting = (e: ChangeEvent<HTMLSelectElement>) => {
-    dispatch({ type: 'UPDATE_CARDS_SORTING', data: e.target.value });
+    dispatch(saveSortingRule(e.target.value));
   };
 
   return (
-    <select className="input" value={state.sortingRule} onChange={(e) => handleOnClickSorting(e)}>
+    <select className="input" value={sortRule} onChange={(e) => handleOnClickSorting(e)}>
       <option value="">Sorting</option>
       <option value="by-name">By name</option>
       <option value="by-status">By status</option>

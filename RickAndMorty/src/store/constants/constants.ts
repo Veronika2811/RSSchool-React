@@ -1,11 +1,10 @@
-import TInitalState from './types';
+import TInitalState from '../types/TInitalState';
 
 const INITIAL_STATE: TInitalState = {
-  searchText: '',
-  sortingRule: '',
-
-  cardUser: [],
-  characters: null,
+  cardUsers: [],
+  searchQuery: '',
+  sortRule: '',
+  characters: [],
   info: {
     count: 0,
     next: null,
@@ -13,6 +12,8 @@ const INITIAL_STATE: TInitalState = {
     prev: null,
   },
   currentPage: 1,
+  isLoading: false,
+  noData: false,
 };
 
 export default INITIAL_STATE;

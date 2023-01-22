@@ -27,9 +27,9 @@ const SelectCountry = () => {
         })}
       >
         <option value="">Select your country</option>
-        {countriesOptions.map((el: string, index: number) => (
-          <option value={el} key={index}>
-            {el}
+        {countriesOptions.map((country: string, index: number) => (
+          <option value={country} key={index}>
+            {country}
           </option>
         ))}
       </select>

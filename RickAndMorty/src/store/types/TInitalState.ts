@@ -2,11 +2,11 @@ import IDataForm from 'components/Form/types/IDataForm';
 import ICharacter from 'components/RickAndMorty/Сharacters/types/ICharacter';
 
 type TInitalState = {
-  searchText: string;
-  sortingRule: string;
+  cardUsers: IDataForm[];
+  searchQuery: string;
+  sortRule: string;
 
-  cardUser: IDataForm[];
-  characters: ICharacter[] | null;
+  characters: ICharacter[] | [];
   info: {
     count: number;
     next: string | null;
@@ -14,6 +14,8 @@ type TInitalState = {
     prev: string | null;
   };
   currentPage: number;
+  isLoading: boolean;
+  noData: boolean;
 };
 
 export default TInitalState;

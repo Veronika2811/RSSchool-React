@@ -1,34 +1,27 @@
-import React, { useContext } from 'react';
+import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 
-import { ContextApp } from 'reducers/reducers';
+import Button from 'components/UI/button/Button';
+import { goToNextPage, goToPrevPage } from 'store/appManagementSlice';
+
+import { RootState } from 'store/store';
 
 import classes from './Pagination.module.scss';
 
 const Pagination = () => {
-  const { state, dispatch } = useContext(ContextApp);
+  const state = useSelector((state: RootState) => state.APP_MANAGEMENT_SLICE);
+  const dispatch = useDispatch();
 
   return (
     <div className={classes.pagination_wrapper}>
       <div className={classes.pagination}>
-        <button
-          disabled={state.info.prev ? false : true}
-          onClick={() => {
-            dispatch({ type: 'decrement' });
-          }}
-          className="btn"
-        >
+        <Button disabled={state.info.prev ? false : true} onClick={() => dispatch(goToPrevPage())}>
           Prev
-        </button>
+        </Button>
         <span className={classes.pagination_current_page}>{state.currentPage}</span>
-        <button
-          disabled={state.info.next ? false : true}
-          onClick={() => {
-            dispatch({ type: 'increment' });
-          }}
-          className="btn"
-        >
+        <Button disabled={state.info.next ? false : true} onClick={() => dispatch(goToNextPage())}>
           Next
-        </button>
+        </Button>
       </div>
       <span>Общее количество страниц: {state.info.pages}</span>
     </div>

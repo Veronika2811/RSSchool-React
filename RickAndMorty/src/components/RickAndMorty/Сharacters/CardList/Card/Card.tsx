@@ -1,16 +1,15 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 
 import CardDetails from './CardDetails/CardDetails';
+import cardLabel from '../../../utils/cardLabel';
 
 import ICharacter from '../../types/ICharacter';
 
 import classes from './Card.module.scss';
 
 const Card = ({ card }: { card: ICharacter }) => {
-  const [openCard, setOpenCard] = useState(false);
-  const colorLabel =
-    card.status === 'Dead' ? '#EC2D01' : card.status === 'Alive' ? '#76c076' : '#808080';
+  const colorLabel = cardLabel(card.status);
 
   const created = new Date(card.created).getFullYear();
 
@@ -19,7 +18,7 @@ const Card = ({ card }: { card: ICharacter }) => {
       className={classes.card}
       key={card.id}
       to={`/characters/${card.id}`}
-      onClick={() => setOpenCard(true)}
+      onClick={() => <CardDetails />}
     >
       <p className={classes.card__label} style={{ backgroundColor: colorLabel }}>
         {card.status}
@@ -40,7 +39,6 @@ const Card = ({ card }: { card: ICharacter }) => {
           Year created: <span className={classes.card_value}>{created}</span>
         </p>
       </div>
-      {openCard && <CardDetails />}
     </Link>
   );
 };

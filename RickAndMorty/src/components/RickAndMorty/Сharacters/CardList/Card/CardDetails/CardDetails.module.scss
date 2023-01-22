@@ -44,3 +44,20 @@
 .card_field {
   font-size: 15px;
 }
+
+.btn_back {
+  text-decoration: none;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  background: #bcdcdc;
+  font-weight: bold;
+  color: black;
+
+  &:not([disabled]):hover {
+    color: teal;
+    border: 1px solid teal;
+    cursor: pointer;
+    transition: color 0.3s;
+  }
+}

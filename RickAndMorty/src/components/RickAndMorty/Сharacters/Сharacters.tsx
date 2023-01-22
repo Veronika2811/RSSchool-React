@@ -1,44 +1,48 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 
-import { ContextApp } from 'reducers/reducers';
-import getData from '../utils/getDate/getDate';
 import Preloader from '../../Preloader/Preloader';
 import CardList from './CardList/CardList';
-
 import classes from './Сharacters.module.scss';
-import sortData from '../utils/sortData/sortData';
+import getData from '../utils/getDate';
+import sortData from '../utils/sortData';
+import {
+  updateСharacterСards,
+  updatePageInfo,
+  saveStateLoadingApp,
+  saveAppDataError,
+} from 'store/appManagementSlice';
+
+import { RootState } from 'store/store';
 
 const Сharacters = () => {
-  const { state, dispatch } = useContext(ContextApp);
-  const [isLoading, setIsLoading] = useState(false);
-  const [isError, setIsError] = useState(false);
+  const state = useSelector((state: RootState) => state.APP_MANAGEMENT_SLICE);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    setIsLoading(true);
-    getData(state.currentPage, state.searchText)
+    dispatch(saveStateLoadingApp(true));
+
+    getData(state.currentPage, state.searchQuery)
       .then((res) => {
         const { info, results } = res.data;
 
-        const sortedCards = sortData(results, state.sortingRule);
+        const sortedCards = state.sortRule ? sortData(results, state.sortRule) : results;
 
-        dispatch({ type: 'UPDATE_СHARACTERS', data: sortedCards ? sortedCards : results });
-        dispatch({ type: 'UPDATE_PAGE_INFO', data: info });
-
-        setIsError(false);
-        setIsLoading(false);
-        return { info, results };
+        dispatch(updateСharacterСards(sortedCards));
+        dispatch(updatePageInfo(info));
+        dispatch(saveAppDataError(false));
       })
       .catch(() => {
-        setIsError(true);
-        setIsLoading(false);
+        dispatch(saveAppDataError(true));
       });
-  }, [state.searchText, state.sortingRule, state.currentPage, dispatch]);
+    dispatch(saveStateLoadingApp(false));
+  }, [state.currentPage, state.searchQuery, state.sortRule]);
 
   return (
     <>
-      {isLoading && <Preloader />}
-      {!isError && <CardList cards={state.characters} />}
-      {isError && <h3 className={classes.error_message}>Ничего не найдено</h3>}
+      {state.isLoading && <Preloader />}
+      {!state.noData && <CardList cards={state.characters} />}
+      {state.noData && <h3 className={classes.error_message}>Ничего не найдено</h3>}
     </>
   );
 };

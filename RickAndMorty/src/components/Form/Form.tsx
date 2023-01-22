@@ -1,5 +1,6 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { useForm, FormProvider } from 'react-hook-form';
+import { useDispatch } from 'react-redux';
 
 import InputName from './InputName/InputName';
 import InputBirthday from './InputBirthday/InputBirthday';
@@ -7,7 +8,7 @@ import SelectCountry from './SelectCountry/SelectCountry';
 import SwitchSex from './SwitchSex/SwitchSex';
 import InputPhoto from './InputPhoto/InputPhoto';
 import InputConfirm from './InputConfirm/InputConfirm';
-import { ContextApp } from 'reducers/reducers';
+import { saveUserCard } from '../../store/appManagementSlice';
 
 import IDataForm from './types/IDataForm';
 
@@ -15,7 +16,7 @@ import classes from './Form.module.scss';
 
 const Form = () => {
   const methods = useForm<IDataForm>();
-  const { dispatch } = useContext(ContextApp);
+  const dispatch = useDispatch();
 
   const onSubmit = (data: IDataForm) => {
     data.sex = data.sex ? 'female' : 'male';
@@ -23,7 +24,7 @@ const Form = () => {
     const URLPhoto = URL.createObjectURL(methods.getValues('pathPhoto')[0] as unknown as File);
     data.pathPhoto = URLPhoto;
 
-    dispatch({ type: 'SAVE_FORM_CARD', data });
+    dispatch(saveUserCard(data));
 
     resetForm();
   };
