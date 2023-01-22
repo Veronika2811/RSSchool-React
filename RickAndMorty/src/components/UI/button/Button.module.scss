@@ -1,0 +1,18 @@
+.btn {
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  background: #bcdcdc;
+  font-weight: bold;
+
+  &:not([disabled]):hover {
+    color: teal;
+    border: 1px solid teal;
+    cursor: pointer;
+    transition: color 0.3s;
+  }
+
+  &:disabled {
+    background-color: #d1d1d1;
+  }
+}
